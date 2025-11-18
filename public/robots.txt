@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /faculty
+Allow: /
+
+Sitemap: https://www.jrmsu-gcare.com/sitemap.xml
