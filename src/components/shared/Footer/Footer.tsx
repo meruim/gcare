@@ -18,8 +18,23 @@ export const Footer: React.FC = () => {
               Gerald C. Villaver
             </a>
           </p>
+          <div className="flex flex-wrap items-center justify-center gap-3 text-sm">
+            <a
+              href="/terms"
+              className="text-gray-400 hover:text-white transition-colors underline"
+            >
+              Terms and Conditions
+            </a>
+            <span className="text-gray-600">|</span>
+            <a
+              href="/privacy"
+              className="text-gray-400 hover:text-white transition-colors underline"
+            >
+              Privacy Policy
+            </a>
+          </div>
           <p className="text-gray-400 text-sm">
-            © {currentYear} GCare (Guidance Care). All rights reserved.
+            © {currentYear} GCare. All rights reserved.
           </p>
         </div>
       </div>
