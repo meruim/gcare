@@ -1,12 +1,22 @@
 import { useState, useEffect, useRef } from "react";
 import { NavConfig } from "@/config";
+import { getSubdomain } from "@/utils/subdomain";
+import { SubDomainUtility } from "@/utils";
+
+const FULL_NAV_SUBDOMAINS = ["main", "faculty"];
 
 export const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("/");
   const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
+  const [subdomain, setSubdomain] = useState<string>("main");
+
   const navRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setSubdomain(getSubdomain());
+  }, []);
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
 
@@ -49,6 +59,14 @@ export const Navbar: React.FC = () => {
     setIsMenuOpen(false);
   };
 
+  const handleBack = () => {
+    if (window.history.length > 1) {
+      window.history.back();
+    } else {
+      window.location.href = SubDomainUtility.getSubdomainUrl("main");
+    }
+  };
+
   const normalize = (s: string) => {
     if (!s) return "/";
     try {
@@ -81,12 +99,10 @@ export const Navbar: React.FC = () => {
     }
   };
 
-  // NEW: Handle hash scrolling on page load
   useEffect(() => {
     const scrollToHash = () => {
       const hash = window.location.hash.substring(1);
       if (hash) {
-        // Use requestAnimationFrame to ensure DOM is ready
         requestAnimationFrame(() => {
           setTimeout(() => {
             const element = document.getElementById(hash);
@@ -106,10 +122,7 @@ export const Navbar: React.FC = () => {
       }
     };
 
-    // Scroll on initial load
     scrollToHash();
-
-    // Handle hash changes (browser back/forward)
     window.addEventListener("hashchange", scrollToHash);
 
     return () => {
@@ -168,13 +181,54 @@ export const Navbar: React.FC = () => {
     return () => window.removeEventListener("resize", updateIndicator);
   }, [activeLink]);
 
+  const showFullNav = FULL_NAV_SUBDOMAINS.includes(subdomain);
+
+  // MINIMAL NAVIGATION
+  if (!showFullNav) {
+    return (
+      <header className="bg-primary sticky top-0 z-50 text-white" ref={menuRef}>
+        <div className="max-w-6xl mx-auto px-3 sm:px-5 lg:px-6">
+          <div className="flex justify-between items-center h-14">
+            <a
+              href={SubDomainUtility.getSubdomainUrl("main")}
+              className="text-lg sm:text-xl font-bold hover:opacity-80 transition-opacity"
+            >
+              GCare
+            </a>
+
+            <button
+              onClick={handleBack}
+              className="flex items-center gap-2 text-sm font-medium hover:opacity-80 transition-opacity"
+              aria-label="Go back"
+            >
+              <svg
+                className="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                />
+              </svg>
+              <span className="hidden sm:inline">Back</span>
+            </button>
+          </div>
+        </div>
+      </header>
+    );
+  }
+
+  // FULL NAVIGATION
   return (
     <header className="bg-primary sticky top-0 z-50 text-white" ref={menuRef}>
       <div className="max-w-6xl mx-auto px-3 sm:px-5 lg:px-6">
         <div className="flex justify-between items-center h-14">
-          {/* Logo */}
           <a
-            href="/"
+            href={SubDomainUtility.getSubdomainUrl("main")}
             className="text-lg sm:text-xl font-bold hover:opacity-80 transition-opacity"
             onClick={(e) => handleLinkClick(e, "/")}
           >
@@ -187,7 +241,7 @@ export const Navbar: React.FC = () => {
               className="ml-6 flex items-baseline space-x-4 relative"
               ref={navRef}
             >
-              {/* Smooth sliding indicator */}
+              {/* Sliding indicator */}
               <span
                 className="absolute -bottom-[2px] h-[2px] bg-white rounded-full transition-all duration-300 ease-out"
                 style={{
@@ -230,7 +284,6 @@ export const Navbar: React.FC = () => {
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              aria-hidden="true"
             >
               {isMenuOpen ? (
                 <path
@@ -251,7 +304,7 @@ export const Navbar: React.FC = () => {
           </button>
         </div>
 
-        {/* Mobile Menu with animation */}
+        {/* Mobile Menu */}
         <nav
           id="mobile-menu"
           className={`md:hidden overflow-hidden transition-all duration-300 ease-out ${
