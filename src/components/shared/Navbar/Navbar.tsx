@@ -37,6 +37,8 @@ export const Navbar: React.FC = () => {
             behavior: "smooth",
           });
           window.history.pushState(null, "", href);
+        } else {
+          window.location.href = `/#${hash}`;
         }
       } else {
         window.location.href = href;
@@ -78,6 +80,42 @@ export const Navbar: React.FC = () => {
       });
     }
   };
+
+  // NEW: Handle hash scrolling on page load
+  useEffect(() => {
+    const scrollToHash = () => {
+      const hash = window.location.hash.substring(1);
+      if (hash) {
+        // Use requestAnimationFrame to ensure DOM is ready
+        requestAnimationFrame(() => {
+          setTimeout(() => {
+            const element = document.getElementById(hash);
+            if (element) {
+              const navHeight = menuRef.current?.offsetHeight || 56;
+              const elementPosition =
+                element.getBoundingClientRect().top + window.pageYOffset;
+              const offsetPosition = elementPosition - navHeight;
+
+              window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth",
+              });
+            }
+          }, 100);
+        });
+      }
+    };
+
+    // Scroll on initial load
+    scrollToHash();
+
+    // Handle hash changes (browser back/forward)
+    window.addEventListener("hashchange", scrollToHash);
+
+    return () => {
+      window.removeEventListener("hashchange", scrollToHash);
+    };
+  }, []);
 
   useEffect(() => {
     const current = window.location.pathname + (window.location.hash || "");

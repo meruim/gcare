@@ -50,12 +50,19 @@ export default defineConfig({
     },
   },
 
+  server: {
+    host: "0.0.0.0",
+    port: 5173,
+    strictPort: false,
+  },
+
   build: {
     // Optimize chunks
     rollupOptions: {
       output: {
         manualChunks: {
           "react-vendor": ["react", "react-dom", "react-router-dom"],
+          helmet: ["react-helmet-async"],
         },
       },
     },
@@ -73,6 +80,6 @@ export default defineConfig({
   },
 
   optimizeDeps: {
-    include: ["react", "react-dom", "react-router-dom"],
+    include: ["react", "react-dom", "react-router-dom", "react-helmet-async"],
   },
 });
