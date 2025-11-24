@@ -186,19 +186,22 @@ export const Navbar: React.FC = () => {
   // MINIMAL NAVIGATION
   if (!showFullNav) {
     return (
-      <header className="bg-primary sticky top-0 z-50 text-white" ref={menuRef}>
+      <header
+        className="bg-white border-b border-gray-200 sticky top-0 z-50"
+        ref={menuRef}
+      >
         <div className="max-w-6xl mx-auto px-3 sm:px-5 lg:px-6">
           <div className="flex justify-between items-center h-14">
             <a
               href={SubDomainUtility.getSubdomainUrl("main")}
-              className="text-lg sm:text-xl font-bold hover:opacity-80 transition-opacity"
+              className="text-lg sm:text-xl font-bold text-primary hover:opacity-80 transition-opacity"
             >
               GCare
             </a>
 
             <button
               onClick={handleBack}
-              className="flex items-center gap-2 text-sm font-medium hover:opacity-80 transition-opacity"
+              className="flex items-center gap-2 text-sm font-medium text-primary hover:opacity-80 transition-opacity"
               aria-label="Go back"
             >
               <svg
@@ -224,12 +227,15 @@ export const Navbar: React.FC = () => {
 
   // FULL NAVIGATION
   return (
-    <header className="bg-primary sticky top-0 z-50 text-white" ref={menuRef}>
+    <header
+      className="bg-white border-b border-gray-200 sticky top-0 z-50"
+      ref={menuRef}
+    >
       <div className="max-w-6xl mx-auto px-3 sm:px-5 lg:px-6">
         <div className="flex justify-between items-center h-14">
           <a
             href={SubDomainUtility.getSubdomainUrl("main")}
-            className="text-lg sm:text-xl font-bold hover:opacity-80 transition-opacity"
+            className="text-lg sm:text-xl font-bold text-primary hover:opacity-80 transition-opacity"
             onClick={(e) => handleLinkClick(e, "/")}
           >
             GCare
@@ -243,7 +249,7 @@ export const Navbar: React.FC = () => {
             >
               {/* Sliding indicator */}
               <span
-                className="absolute -bottom-[2px] h-[2px] bg-white rounded-full transition-all duration-300 ease-out"
+                className="absolute -bottom-[2px] h-[2px] bg-primary rounded-full transition-all duration-300 ease-out"
                 style={{
                   left: `${indicatorStyle.left}px`,
                   width: `${indicatorStyle.width}px`,
@@ -260,8 +266,10 @@ export const Navbar: React.FC = () => {
                     onClick={(e) => handleLinkClick(e, link.href)}
                     data-active={active}
                     aria-current={active ? "page" : undefined}
-                    className={`relative px-2 py-1.5 text-sm font-medium transition-opacity ${
-                      active ? "opacity-100" : "opacity-80 hover:opacity-100"
+                    className={`relative px-2 py-1.5 text-sm font-medium transition-colors ${
+                      active
+                        ? "text-primary"
+                        : "text-gray-600 hover:text-primary"
                     }`}
                   >
                     {link.label}
@@ -274,7 +282,7 @@ export const Navbar: React.FC = () => {
           {/* Mobile Button */}
           <button
             onClick={toggleMenu}
-            className="md:hidden hover:opacity-80 transition-opacity"
+            className="md:hidden text-primary hover:opacity-80 transition-opacity"
             aria-expanded={isMenuOpen}
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             aria-controls="mobile-menu"
@@ -313,9 +321,9 @@ export const Navbar: React.FC = () => {
               : "max-h-0 opacity-0 -translate-y-2"
           }`}
           aria-label="Mobile navigation"
-          aria-hidden={!isMenuOpen}
+          {...(!isMenuOpen && ({ inert: "" } as any))}
         >
-          <div className="px-2 pt-1 pb-2 space-y-1 bg-[#27287A] border-t border-white/20 rounded-b-lg">
+          <div className="px-2 pt-1 pb-2 space-y-1 bg-gray-50 border-t border-gray-200 rounded-b-lg">
             {NavConfig.map((link) => {
               const active = isLinkActive(link.href);
               return (
@@ -326,13 +334,13 @@ export const Navbar: React.FC = () => {
                   aria-current={active ? "page" : undefined}
                   className={`relative flex items-center px-3 py-1.5 rounded-md text-sm font-medium transition-all ${
                     active
-                      ? "bg-white/10 text-white"
-                      : "hover:bg-white/10 text-white/80 hover:text-white"
+                      ? "bg-primary/10 text-primary"
+                      : "hover:bg-gray-100 text-gray-600 hover:text-primary"
                   }`}
                 >
                   {active && (
                     <span
-                      className="absolute left-0 top-0 bottom-0 w-[3px] rounded-r-full bg-white"
+                      className="absolute left-0 top-0 bottom-0 w-[3px] rounded-r-full bg-primary"
                       aria-hidden="true"
                     />
                   )}

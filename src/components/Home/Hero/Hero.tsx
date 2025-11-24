@@ -18,24 +18,24 @@ export const Hero: React.FC = () => {
     >
       <div className="max-w-6xl w-full flex flex-col lg:flex-row items-center gap-8 sm:gap-12 lg:gap-16">
         {/* Left Content Section */}
-        <div className="flex-1 text-center lg:text-left">
+        <div className="flex-1 text-center lg:text-left animate-fade-in-up">
           {/* Logos */}
-          <div className="flex justify-center lg:justify-start items-center gap-4 sm:gap-5 md:gap-6 lg:gap-6 mb-4 sm:mb-6 md:mb-7 lg:mb-8">
+          <div className="flex justify-center lg:justify-start items-center gap-3 sm:gap-4 md:gap-5 lg:gap-6 mb-4 sm:mb-6 md:mb-7 lg:mb-8">
             <img
               src={jrmsu_logo}
               alt="JRMSU Logo"
-              width="112"
-              height="112"
+              width="96"
+              height="96"
               loading="eager"
-              className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-24 lg:h-24 object-contain"
+              className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain"
             />
             <img
               src={guidance_logo}
               alt="Guidance Logo"
-              width="112"
-              height="112"
+              width="96"
+              height="96"
               loading="eager"
-              className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-24 lg:h-24 object-contain"
+              className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain"
             />
           </div>
 
@@ -141,30 +141,30 @@ export const Hero: React.FC = () => {
           </div>
         </div>
 
-        {/* Phone Mockup Section */}
-        <div className="flex justify-center lg:justify-end w-full lg:w-auto">
-          <img
-            src={hero_interface}
-            alt="GCare app interface showing appointment scheduling screen"
-            width="256"
-            height="512"
-            loading="eager"
-            className="
-      w-40 
-      sm:w-48 
-      md:w-56 
-      lg:w-60 
-      xl:w-64 
-      h-auto 
-      object-contain 
-      mx-auto 
-      lg:mx-0 
-      transition-transform 
-      duration-300 
-      hover:scale-105
-    "
-            style={{ mixBlendMode: "darken" }}
-          />
+        {/* Right Section */}
+        <div className="flex justify-center lg:justify-end w-full lg:w-auto relative">
+          <div className="relative w-40 sm:w-48 md:w-56 lg:w-64 xl:w-72 flex items-center justify-center">
+            <div
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none animate-pulse"
+              style={{
+                width: "160%",
+                height: "160%",
+                background:
+                  "radial-gradient(circle, rgba(147, 197, 253, 0.4) 0%, rgba(191, 219, 254, 0.2) 35%, transparent 65%)",
+                borderRadius: "50%",
+                filter: "blur(40px)",
+              }}
+            ></div>
+
+            <img
+              src={hero_interface}
+              alt="GCare mockup"
+              className="w-64 lg:w-72 xl:w-80 h-auto object-contain relative z-10 transition-transform duration-300 hover:scale-105 animate-fade-in-scale"
+              style={{
+                filter: "drop-shadow(0 25px 50px rgba(0, 0, 0, 0.15))",
+              }}
+            />
+          </div>
         </div>
       </div>
     </div>
