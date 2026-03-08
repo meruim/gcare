@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://api.github.com" crossorigin />
+    <link rel="dns-prefetch" href="https://api.github.com" />
+
+    <!-- Google Site Verification -->
+    <meta
+      name="google-site-verification"
+      content="qQ95IocSA7t7IoV5-4FfUX0248RScnq9i9LY3J1"
+    />
+
+    <!-- Default Meta (will be overridden by Helmet) -->
+    <title>GCare - JRMSU Guidance</title>
+    <meta name="description" content="JRMSU Guidance appointment system" />
+
+    <!-- Structured Data: Organization (stays static) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Jose Rizal Memorial State University - Guidance Office",
+        "url": "https://www.jrmsu-gcare.com/",
+        "logo": "https://www.jrmsu-gcare.com/logo.png",
+        "description": "Official JRMSU Guidance appointment scheduling system powered by GCare",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "PH"
+        }
+      }
+    </script>
+
+    <!-- MobileApplication Schema (will be updated by SEO component) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "MobileApplication",
+        "name": "GCare",
+        "operatingSystem": "Android",
+        "applicationCategory": "EducationApplication",
+        "softwareVersion": "1.0",
+        "downloadUrl": "https://www.jrmsu-gcare.com/",
+        "description": "QR Code-Enabled Appointment Scheduling for JRMSU Guidance"
+      }
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is GCare?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "GCare stands for Guidance Care, the QR Code-Enabled Appointment Scheduling Manager Application for JRMSU Guidance Office."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I book an appointment using GCare?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Download the GCare app for Android, create an account, select your preferred date and time, and book your guidance appointment with QR code verification."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is GCare free to use?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, GCare is completely free for all JRMSU students."
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
