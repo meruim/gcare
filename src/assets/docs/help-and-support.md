@@ -9,7 +9,7 @@
 
   <img 
     src="https://res.cloudinary.com/dasd7oi7y/image/upload/v1772292647/p0gjkphqwsg6k6descop.webp" 
-    alt="Click Help and Support"
+    alt="Click Help and Supports"
     class="w-[170px] h-auto rounded-2xl shadow-md"
   />
 </div>
